@@ -5,14 +5,13 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "dev": "tsx src/clusters.ts",
+    "dev": "tsx src/main.ts",
     "test": "npx autocannon -c 500 -d 30 --workers 10 --renderStatusCodes --latency --warmup [ -c 1 -d 2 ] localhost:3000"
   },
   "devDependencies": {
     "@types/node": "^20.6.5",
     "autocannon": "^7.8.1",
     "tsx": "^3.13.0",
-    "tsc": "^2.0.4",
     "typescript": "^5.2.2"
   },
   "dependencies": {

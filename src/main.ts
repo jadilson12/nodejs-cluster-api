@@ -1,23 +1,8 @@
-import http from "node:http";
-import { Logger } from "./logger";
-const processId = process.pid;
+import Clusters from "./clusters";
+import ServerNative from "./native/serverNative";
 
-const server = http.createServer((request, response) => {
-  for (let index = 0; index < 1e7; index++);
-  response.end(`handled by pid: ${processId}`);
-});
+function bootstarp() {
+  ServerNative.start();
+}
 
-server.listen(3000).once("listening", () => {
-  Logger.info("Server started in process", processId);
-});
-
-// aguardar as conexoes serem encerradas para só então encerrar o programa
-process.on("SIGTERM", () => {
-  Logger.info("server ending", new Date().toISOString());
-  server.close(() => process.exit());
-});
-
-// vamos simular que um erro aleatorio aconteceu
-setTimeout(() => {
-  process.exit(1);
-}, Math.random() * 1e4); // 10.000
+Clusters.clustmize(bootstarp);
